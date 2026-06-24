@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Quadcopter Modeling and Fail-Safe Flight Control</title>
+  <meta name="description" content="Two 2020 papers from the University of the Philippines Diliman on quadcopter dynamic modeling and fail-safe control: low-cost propeller and airframe-drag characterization without a reaction-torque sensor, and three- and two-propeller fault-tolerant controller architectures that land a quadcopter after motor failure. Winner of the ICCAR 2020 Best Presentation Award.">
+  <meta name="keywords" content="quadcopter, fail-safe control, fault-tolerant control, motor failure, UAV, drone, LQR, PID, propeller characterization, quadcopter modeling, aerial robotics, failure detection and recovery, ICCAR 2020">
+  <meta name="author" content="Gene Patrick S. Rible, Nicolette Ann A. Arriola, Manuel C. Ramos Jr.">
+
+  <!-- Canonical URL: avoids duplicate-content splits across URL variants -->
+  <link rel="canonical" href="https://genepatrickrible.github.io/quadcopter-failsafe/">
+
+  <!-- Google Search Console site-verification (paste token after GSC registration) -->
+  <meta name="google-site-verification" content="{{GSC_TOKEN}}">
+
+  <!-- Bing Webmaster Tools site-verification (paste token after Bing registration) -->
+  <meta name="msvalidate.01" content="{{BING_TOKEN}}">
+
+  <!-- Google Scholar citation metadata for the flagship (journal) paper.
+       The conference paper is recovered via the JSON-LD and the BibTeX block. -->
+  <meta name="citation_title" content="Modeling and Implementation of Quadcopter Autonomous Flight Based on Alternative Methods to Determine Propeller Parameters">
+  <meta name="citation_author" content="Rible, Gene Patrick S.">
+  <meta name="citation_author" content="Arriola, Nicolette Ann A.">
+  <meta name="citation_author" content="Ramos, Manuel C., Jr.">
+  <meta name="citation_publication_date" content="2020/10/10">
+  <meta name="citation_journal_title" content="Advances in Science, Technology and Engineering Systems Journal">
+  <meta name="citation_journal_abbrev" content="ASTESJ">
+  <meta name="citation_publisher" content="ASTES Publishers">
+  <meta name="citation_issn" content="2415-6698">
+  <meta name="citation_volume" content="5">
+  <meta name="citation_issue" content="5">
+  <meta name="citation_firstpage" content="727">
+  <meta name="citation_lastpage" content="741">
+  <meta name="citation_doi" content="10.25046/aj050589">
+  <meta name="citation_abstract_html_url" content="https://doi.org/10.25046/aj050589">
+  <meta name="citation_pdf_url" content="https://genepatrickrible.github.io/quadcopter-failsafe/static/pdfs/astesj2020-quadcopter-modeling.pdf">
+
+  <!-- Open Graph / social preview -->
+  <meta property="og:title" content="Quadcopter Modeling and Fail-Safe Flight Control">
+  <meta property="og:description" content="Low-cost quadcopter modeling and fault-tolerant control that land a drone after losing one, two, or three motors. ICCAR 2020 Best Presentation Award.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://genepatrickrible.github.io/quadcopter-failsafe/">
+  <meta property="og:image" content="https://genepatrickrible.github.io/quadcopter-failsafe/static/images/teaser-social.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Quadcopter Modeling and Fail-Safe Flight Control">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://genepatrickrible.github.io/quadcopter-failsafe/static/images/teaser-social.png">
+
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="192x192" href="static/images/favicon-192.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="static/images/favicon-96.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="static/images/favicon-48.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="static/images/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="static/images/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="static/images/apple-touch-icon.png">
+
+  <!-- Bulma + icon fonts via CDN (no build step) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <!-- Schema.org JSON-LD: a Collection holding both ScholarlyArticles. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Collection",
+    "name": "Quadcopter Modeling and Fail-Safe Flight Control",
+    "description": "A two-paper body of work on quadcopter dynamic modeling and fault-tolerant control for motor failure.",
+    "url": "https://genepatrickrible.github.io/quadcopter-failsafe/",
+    "hasPart": [
+      {
+        "@type": "ScholarlyArticle",
+        "name": "Fail-Safe Controller Architectures for Quadcopter with Motor Failures",
+        "author": [
+          {"@type": "Person", "name": "Gene Patrick S. Rible"},
+          {"@type": "Person", "name": "Nicolette Ann A. Arriola"},
+          {"@type": "Person", "name": "Manuel C. Ramos Jr."}
+        ],
+        "datePublished": "2020-04",
+        "publisher": {"@type": "Organization", "name": "IEEE"},
+        "isPartOf": {
+          "@type": "PublicationEvent",
+          "name": "2020 6th International Conference on Control, Automation and Robotics (ICCAR)",
+          "location": {"@type": "Place", "name": "Singapore"}
+        },
+        "identifier": {"@type": "PropertyValue", "propertyID": "DOI", "value": "10.1109/ICCAR49639.2020.9108038"},
+        "url": "https://doi.org/10.1109/ICCAR49639.2020.9108038",
+        "sameAs": "https://arxiv.org/abs/2009.10260",
+        "award": "Best Presentation Award, ICCAR 2020",
+        "abstract": "A fail-safe algorithm in case of motor failure was developed, simulated, and tested. For practical fail-safe flight, the quadcopter may fly with only three or two opposing propellers, using onboard sensors and processor."
+      },
+      {
+        "@type": "ScholarlyArticle",
+        "name": "Modeling and Implementation of Quadcopter Autonomous Flight Based on Alternative Methods to Determine Propeller Parameters",
+        "author": [
+          {"@type": "Person", "name": "Gene Patrick S. Rible"},
+          {"@type": "Person", "name": "Nicolette Ann A. Arriola"},
+          {"@type": "Person", "name": "Manuel C. Ramos Jr."}
+        ],
+        "datePublished": "2020-10-10",
+        "publisher": {"@type": "Organization", "name": "ASTES Publishers"},
+        "isPartOf": {
+          "@type": "PublicationIssue",
+          "issueNumber": "5",
+          "isPartOf": {
+            "@type": "PublicationVolume",
+            "volumeNumber": "5",
+            "isPartOf": {
+              "@type": "Periodical",
+              "name": "Advances in Science, Technology and Engineering Systems Journal",
+              "issn": "2415-6698"
+            }
+          }
+        },
+        "pageStart": "727",
+        "pageEnd": "741",
+        "identifier": {"@type": "PropertyValue", "propertyID": "DOI", "value": "10.25046/aj050589"},
+        "url": "https://doi.org/10.25046/aj050589",
+        "sameAs": "https://arxiv.org/abs/2010.08806",
+        "abstract": "Alternative low-cost methods to determine quadcopter propeller parameters and airframe drag, yielding a dynamic model that behaves identically to the true model and serves as a baseline for fail-safe control."
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+<!-- ============================== HERO / BRAND ============================== -->
+<section class="hero is-light">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+
+          <h1 class="title is-2 publication-title">Quadcopter Modeling and Fail-Safe Flight Control</h1>
+          <p class="subtitle is-5 tagline">Low-cost dynamic modeling and fault-tolerant control that keep a quadcopter flying and landing after losing one, two, or even three motors.</p>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">Gene Patrick S. Rible<sup>*</sup></span>,
+            <span class="author-block">Nicolette Ann A. Arriola</span>,
+            <span class="author-block">Manuel C. Ramos Jr.</span>
+          </div>
+
+          <div class="is-size-6 publication-affiliations">
+            <span class="affil-block">Electrical and Electronics Engineering Institute, University of the Philippines Diliman, Quezon City, Philippines</span>
+            <br>
+            <em><sup>*</sup>Corresponding author: <a href="mailto:grible@vols.utk.edu" style="text-decoration: underline;">grible@vols.utk.edu</a></em>
+          </div>
+
+          <p class="award-highlight">
+            <a href="https://www.iccar.org/2020.html" target="_blank" rel="noopener">
+              <span class="icon"><i class="fas fa-award"></i></span>
+              <span>Best Presentation Award, ICCAR 2020</span>
+            </a>
+          </p>
+
+          <div class="publication-links">
+            <span class="link-block">
+              <a href="#papers" class="button is-dark is-rounded">
+                <span class="icon"><i class="fas fa-list"></i></span><span>The papers</span>
+              </a>
+            </span>
+            <span class="link-block">
+              <a href="#videos" class="button is-dark is-rounded">
+                <span class="icon"><i class="fas fa-circle-play"></i></span><span>Videos</span>
+              </a>
+            </span>
+            <span class="link-block">
+              <a href="#citation" class="button is-dark is-rounded">
+                <span class="icon"><i class="fas fa-quote-right"></i></span><span>Cite</span>
+              </a>
+            </span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== TEASER ============================== -->
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <!-- TODO(media): replace with a fail-safe flight GIF / looping clip (static/images/teaser.gif or static/videos/teaser.mp4). -->
+    <div class="placeholder-box placeholder-16x9">
+      <div class="placeholder-label">
+        <span class="icon is-large"><i class="fas fa-helicopter fa-2x"></i></span>
+        <p><strong>Replace: fail-safe flight teaser GIF / looping video</strong></p>
+        <p class="is-size-7">Put the file at <code>static/images/teaser.gif</code> or <code>static/videos/teaser.mp4</code>.</p>
+      </div>
+    </div>
+    <h2 class="subtitle has-text-centered teaser-caption">A DJI FlameWheel 450 stabilizing and landing on two opposing propellers after induced motor failure.</h2>
+  </div>
+</section>
+
+<!-- ============================== ABOUT ============================== -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-justified">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3 has-text-centered">About this work</h2>
+        <div class="content">
+          <p>
+            Stable flight normally needs at least four propellers, yet a quadcopter that loses a
+            motor mid-air does not have to fall. This body of work, carried out at the Electrical
+            and Electronics Engineering Institute of the University of the Philippines Diliman,
+            shows how to keep one flying and land it safely after the complete loss of two opposing
+            or three motors, using only its onboard sensors and processor.
+          </p>
+          <p>
+            The two papers build on each other. The first establishes a complete dynamic model of
+            the quadcopter using alternative, low-cost methods: it recovers propeller thrust,
+            torque, and speed relationships, and the airframe's rotational aerodynamic drag,
+            without the expensive reaction-torque sensor such characterization usually requires.
+            The second uses that model to design and test two fail-safe controller architectures
+            (three-propeller and two-propeller) that detect a failure, identify which motors are
+            gone, and stabilize the vehicle for a controlled return and landing. The fail-safe
+            paper received the Best Presentation Award at the 2020 6th International Conference on
+            Control, Automation and Robotics (ICCAR) in Singapore.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== PAPERS ============================== -->
+<section class="section has-background-light" id="papers">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">The papers</h2>
+    <div class="columns is-multiline">
+
+      <!-- Paper 1 (conference, award) -->
+      <div class="column is-full">
+        <div class="paper-card">
+          <h3 class="title is-4">Fail-Safe Controller Architectures for Quadcopter with Motor Failures</h3>
+          <p class="is-size-6 paper-authors">Gene Patrick S. Rible, Nicolette Ann A. Arriola, Manuel C. Ramos Jr.</p>
+          <p class="publication-venue">
+            <a class="tag is-dark is-medium venue-link" href="https://doi.org/10.1109/ICCAR49639.2020.9108038" target="_blank" rel="noopener">
+              2020 6th Int'l Conf. on Control, Automation and Robotics (ICCAR), Singapore&nbsp;<strong>2020</strong>
+            </a>
+            <a class="tag is-warning is-medium venue-link" href="https://www.iccar.org/2020.html" target="_blank" rel="noopener">
+              <span class="icon"><i class="fas fa-award"></i></span>&nbsp;Best Presentation Award
+            </a>
+          </p>
+          <p class="content">
+            A fail-safe algorithm that stabilizes and lands a quadcopter after the complete loss of
+            two opposing or three motors. Both the three-propeller and two-propeller architectures
+            pair an LQR inner attitude controller with a damped second-order outer controller, run
+            entirely on the onboard processor, and were validated in simulation and on hardware.
+          </p>
+          <div class="publication-links">
+            <span class="link-block"><a href="static/pdfs/iccar2020-failsafe-architectures.pdf" class="button is-dark is-rounded is-small" target="_blank" rel="noopener"><span class="icon"><i class="fas fa-file-pdf"></i></span><span>Paper (PDF)</span></a></span>
+            <span class="link-block"><a href="https://doi.org/10.1109/ICCAR49639.2020.9108038" class="button is-dark is-rounded is-small" target="_blank" rel="noopener"><span class="icon"><i class="ai ai-doi"></i></span><span>DOI</span></a></span>
+            <span class="link-block"><a href="https://arxiv.org/abs/2009.10260" class="button is-dark is-rounded is-small" target="_blank" rel="noopener"><span class="icon"><i class="ai ai-arxiv"></i></span><span>arXiv</span></a></span>
+            <span class="link-block">
+              <div class="dropdown cite-dropdown">
+                <div class="dropdown-trigger">
+                  <button class="button is-dark is-rounded is-small" aria-haspopup="true" aria-controls="cite-menu-1">
+                    <span class="icon"><i class="fas fa-quote-right"></i></span><span>Cite</span>
+                    <span class="icon is-small"><i class="fas fa-angle-down"></i></span>
+                  </button>
+                </div>
+                <div class="dropdown-menu" id="cite-menu-1" role="menu">
+                  <div class="dropdown-content">
+                    <a href="#" class="dropdown-item" data-cite-text
+                       data-citation-text="Gene Patrick S. Rible, Nicolette Ann A. Arriola, and Manuel C. Ramos Jr., &quot;Fail-Safe Controller Architectures for Quadcopter with Motor Failures,&quot; in 2020 6th International Conference on Control, Automation and Robotics (ICCAR), Singapore, 2020. doi:10.1109/ICCAR49639.2020.9108038"
+                       data-citation-html="Gene Patrick S. Rible, Nicolette Ann A. Arriola, and Manuel C. Ramos Jr., &quot;Fail-Safe Controller Architectures for Quadcopter with Motor Failures,&quot; in <i>2020 6th International Conference on Control, Automation and Robotics (ICCAR)</i>, Singapore, 2020. doi:10.1109/ICCAR49639.2020.9108038">
+                      <span class="icon"><i class="fas fa-copy"></i></span><span class="cite-label">Copy as text</span>
+                    </a>
+                    <a href="#citation" class="dropdown-item">
+                      <span class="icon"><i class="fas fa-code"></i></span><span>BibTeX (.bib)</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Paper 2 (journal, flagship) -->
+      <div class="column is-full">
+        <div class="paper-card">
+          <h3 class="title is-4">Modeling and Implementation of Quadcopter Autonomous Flight Based on Alternative Methods to Determine Propeller Parameters</h3>
+          <p class="is-size-6 paper-authors">Gene Patrick S. Rible, Nicolette Ann A. Arriola, Manuel C. Ramos Jr.</p>
+          <p class="publication-venue">
+            <a class="tag is-dark is-medium venue-link" href="https://doi.org/10.25046/aj050589" target="_blank" rel="noopener">
+              Adv. Sci. Technol. Eng. Syst. J.&nbsp;<strong>5</strong>(5) 727&nbsp;<strong>2020</strong>
+            </a>
+          </p>
+          <p class="content">
+            The modeling foundation for the fail-safe work. It recovers the quadcopter's propeller
+            and airframe-drag parameters with only a scale and basic electrical measurements, no
+            reaction-torque sensor, and shows that the resulting model behaves identically to the
+            real vehicle in both simulation and flight. A practical baseline for small-scale
+            researchers with limited equipment.
+          </p>
+          <div class="publication-links">
+            <span class="link-block"><a href="static/pdfs/astesj2020-quadcopter-modeling.pdf" class="button is-dark is-rounded is-small" target="_blank" rel="noopener"><span class="icon"><i class="fas fa-file-pdf"></i></span><span>Paper (PDF)</span></a></span>
+            <span class="link-block"><a href="https://doi.org/10.25046/aj050589" class="button is-dark is-rounded is-small" target="_blank" rel="noopener"><span class="icon"><i class="ai ai-doi"></i></span><span>DOI</span></a></span>
+            <span class="link-block"><a href="https://arxiv.org/abs/2010.08806" class="button is-dark is-rounded is-small" target="_blank" rel="noopener"><span class="icon"><i class="ai ai-arxiv"></i></span><span>arXiv</span></a></span>
+            <span class="link-block">
+              <div class="dropdown cite-dropdown">
+                <div class="dropdown-trigger">
+                  <button class="button is-dark is-rounded is-small" aria-haspopup="true" aria-controls="cite-menu-2">
+                    <span class="icon"><i class="fas fa-quote-right"></i></span><span>Cite</span>
+                    <span class="icon is-small"><i class="fas fa-angle-down"></i></span>
+                  </button>
+                </div>
+                <div class="dropdown-menu" id="cite-menu-2" role="menu">
+                  <div class="dropdown-content">
+                    <a href="#" class="dropdown-item" data-cite-text
+                       data-citation-text="Gene Patrick S. Rible, Nicolette Ann A. Arriola, and Manuel C. Ramos Jr., &quot;Modeling and Implementation of Quadcopter Autonomous Flight Based on Alternative Methods to Determine Propeller Parameters,&quot; Advances in Science, Technology and Engineering Systems Journal, vol. 5, no. 5, pp. 727-741, 2020. doi:10.25046/aj050589"
+                       data-citation-html="Gene Patrick S. Rible, Nicolette Ann A. Arriola, and Manuel C. Ramos Jr., &quot;Modeling and Implementation of Quadcopter Autonomous Flight Based on Alternative Methods to Determine Propeller Parameters,&quot; <i>Advances in Science, Technology and Engineering Systems Journal</i>, vol. <b>5</b>, no. 5, pp. 727-741, 2020. doi:10.25046/aj050589">
+                      <span class="icon"><i class="fas fa-copy"></i></span><span class="cite-label">Copy as text</span>
+                    </a>
+                    <a href="#citation" class="dropdown-item">
+                      <span class="icon"><i class="fas fa-code"></i></span><span>BibTeX (.bib)</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================== AGGREGATED FIRSTS ============================== -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Highlights across this work</h2>
+    <p class="subtitle is-6 has-text-centered firsts-sub">
+      The distinguishing ideas from each paper. Click a card to jump to the detail.
+    </p>
+    <div class="columns is-multiline">
+
+      <div class="column is-half">
+        <a class="first-card-link" href="#section-architectures">
+          <div class="first-card">
+            <span class="icon has-text-info"><i class="fas fa-shield-halved fa-lg"></i></span>
+            <h3 class="is-size-5 has-text-weight-bold">Flight after total motor loss</h3>
+            <p>Three-propeller and two-propeller architectures keep the quadcopter aloft and land it after losing two opposing or three motors. <em>(ICCAR paper)</em></p>
+          </div>
+        </a>
+      </div>
+
+      <div class="column is-half">
+        <a class="first-card-link" href="#section-detection">
+          <div class="first-card">
+            <span class="icon has-text-info"><i class="fas fa-wave-square fa-lg"></i></span>
+            <h3 class="is-size-5 has-text-weight-bold">Failures read straight from the IMU</h3>
+            <p>Every motor-failure combination leaves a unique signature spike in the state readings, so faults are identified without added hardware. <em>(ICCAR paper)</em></p>
+          </div>
+        </a>
+      </div>
+
+      <div class="column is-half">
+        <a class="first-card-link" href="#section-detection">
+          <div class="first-card">
+            <span class="icon has-text-info"><i class="fas fa-arrows-spin fa-lg"></i></span>
+            <h3 class="is-size-5 has-text-weight-bold">Spin makes it steadier</h3>
+            <p>A higher induced yaw rate increases fail-safe stability, widening the range of survivable initial conditions. <em>(ICCAR paper)</em></p>
+          </div>
+        </a>
+      </div>
+
+      <div class="column is-half">
+        <a class="first-card-link" href="#section-model">
+          <div class="first-card">
+            <span class="icon has-text-info"><i class="fas fa-scale-balanced fa-lg"></i></span>
+            <h3 class="is-size-5 has-text-weight-bold">Propeller parameters without a torque sensor</h3>
+            <p>Thrust-to-PWM, thrust-to-speed, and reaction-torque relationships are recovered with only a scale and basic electrical readings. <em>(Journal paper)</em></p>
+          </div>
+        </a>
+      </div>
+
+      <div class="column is-half">
+        <a class="first-card-link" href="#section-model">
+          <div class="first-card">
+            <span class="icon has-text-info"><i class="fas fa-wind fa-lg"></i></span>
+            <h3 class="is-size-5 has-text-weight-bold">Airframe drag from a rope and bearing</h3>
+            <p>Rotational aerodynamic drag on the body is modeled by spinning the quadcopter on a free bearing, with no wind tunnel required. <em>(Journal paper)</em></p>
+          </div>
+        </a>
+      </div>
+
+      <div class="column is-half">
+        <a class="first-card-link" href="#section-validation">
+          <div class="first-card">
+            <span class="icon has-text-info"><i class="fas fa-equals fa-lg"></i></span>
+            <h3 class="is-size-5 has-text-weight-bold">Wrong parameters, right dynamics</h3>
+            <p>Even when individual parameters miss their true values, the assembled model behaves identically to the real quadcopter, confirmed in simulation and flight. <em>(Journal paper)</em></p>
+          </div>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================== RESULT BLOCKS ============================== -->
+<section class="section has-background-light">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">How it works and what we found</h2>
+
+    <div class="result-block" id="section-model">
+      <h3 class="title is-4">A quadcopter model anyone can build</h3>
+      <!-- TODO(media): replace with Fig. 6-8 propeller characterization plots (thrust vs PWM, thrust vs speed, reaction torque vs thrust). -->
+      <div class="placeholder-box placeholder-wide">
+        <div class="placeholder-label">
+          <p><strong>Replace: propeller characterization plots</strong></p>
+          <p class="is-size-7">thrust vs PWM, thrust vs angular speed, reaction torque vs thrust</p>
+        </div>
+      </div>
+      <p class="content">
+        Accurate quadcopter control needs the relationships between motor command, propeller speed,
+        thrust, and reaction torque, plus the airframe's moments of inertia and aerodynamic drag.
+        These are normally measured with costly equipment such as a reaction-torque sensor. The
+        journal paper replaces that with simple benchtop methods: a weighing scale and tachometer
+        for thrust and speed, current and voltage readings for electrical torque, a pendulum swing
+        for the moments of inertia, and a free-spinning rope-and-bearing rig for the body drag.
+        Scaling motor commands to a finer internal range reduced thrust discretization by two orders
+        of magnitude, giving noticeably smoother flight.
+      </p>
+    </div>
+
+    <div class="result-block" id="section-validation">
+      <h3 class="title is-4">Validated in simulation and in the air</h3>
+      <!-- TODO(media): replace with Fig. 13-14 / Fig. 19-20 flight responses (altitude, roll/pitch banking, yaw). -->
+      <div class="placeholder-box placeholder-wide">
+        <div class="placeholder-label">
+          <p><strong>Replace: basic-flight response figures</strong></p>
+          <p class="is-size-7">altitude hold, roll/pitch banking, yaw rotation responses</p>
+        </div>
+      </div>
+      <p class="content">
+        The assembled model may not capture every true parameter value, yet because the reaction
+        torque and drag enter the dynamics in the same way, the model behaves identically to the
+        real quadcopter. A basic PID flight controller tuned on the model held altitude and tracked
+        roll, pitch, and yaw commands in MATLAB simulation, then flew on the physical DJI FlameWheel
+        450 with matching behavior. That agreement is what makes the model trustworthy as the basis
+        for the harder fail-safe problem.
+      </p>
+    </div>
+
+    <div class="result-block" id="section-architectures">
+      <h3 class="title is-4">Two ways to survive a dead motor</h3>
+      <!-- TODO(media): replace with Fig. 1 kinematic diagram + Fig. 3-7 controller responses. -->
+      <div class="placeholder-box placeholder-wide">
+        <div class="placeholder-label">
+          <p><strong>Replace: controller architecture diagram / response plots</strong></p>
+          <p class="is-size-7">three-propeller and two-propeller simulated and implemented responses</p>
+        </div>
+      </div>
+      <p class="content">
+        When a motor fails, the quadcopter gives up control of one attitude direction and spins
+        about a primary axis to stay aloft. Two architectures handle this. The three-propeller case
+        augments the inner controller with a PID on propeller-force deviations and distributes
+        thrust across the remaining motors, lowering the demand on each. The two-propeller case
+        decouples altitude onto its own PID controller, separate from the LQR attitude loop, which
+        makes it more efficient, more robust, and more stable. Both were tuned and tested, with the
+        two-propeller controller stabilizing and hovering the physical quadcopter on a rope-and-bearing
+        rig.
+      </p>
+    </div>
+
+    <div class="result-block" id="section-detection">
+      <h3 class="title is-4">Detecting the failure, and why spin helps</h3>
+      <!-- TODO(media): replace with Table II signature spikes + Table V initial-condition limits. -->
+      <div class="placeholder-box placeholder-wide">
+        <div class="placeholder-label">
+          <p><strong>Replace: failure-signature table / stability-limit figures</strong></p>
+          <p class="is-size-7">signature spikes per failure case, output and initial-condition limits</p>
+        </div>
+      </div>
+      <p class="content">
+        Each combination of failed motors produces a distinct pattern of spikes across the angular
+        rate and attitude readings, so the controller can identify which motors are gone from the
+        IMU alone, with no extra sensors. Analysis of the output limits, initial-condition limits,
+        and controller frequencies showed the two-propeller architecture tolerates far larger
+        disturbances. A key finding: increasing the induced yaw rate unconditionally lowers the
+        in-plane components that must be controlled, so faster spin yields greater stability. That
+        also means larger, heavier vehicles or those with more air resistance are harder to recover.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================== SUPPLEMENTARY VIDEOS ============================== -->
+<section class="section" id="videos">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Videos</h2>
+    <p class="subtitle is-6 has-text-centered firsts-sub">
+      Upload each clip to YouTube, then replace <code>YOUTUBE_ID</code> with the 11-character video ID.
+    </p>
+    <div class="columns is-multiline">
+
+      <div class="column is-half">
+        <h3 class="is-size-5 has-text-weight-bold has-text-centered">Fail-safe flight demonstration</h3>
+        <!-- TODO(video): paste the YouTube ID for the fail-safe / two-propeller flight demo. -->
+        <div class="video-embed">
+          <iframe src="https://www.youtube.com/embed/YOUTUBE_ID" title="Fail-safe flight demonstration"
+                  frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen></iframe>
+        </div>
+        <p class="has-text-centered is-size-7">The quadcopter stabilizing about its primary axis after induced motor failure.</p>
+      </div>
+
+      <div class="column is-half">
+        <h3 class="is-size-5 has-text-weight-bold has-text-centered">Controller gains tuning</h3>
+        <!-- TODO(video): paste the YouTube ID for the controller-tuning video. -->
+        <div class="video-embed">
+          <iframe src="https://www.youtube.com/embed/YOUTUBE_ID" title="Controller gains tuning"
+                  frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen></iframe>
+        </div>
+        <p class="has-text-centered is-size-7">The bang-bang style tuning process for the two-propeller attitude controller.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================== BIBTEX ============================== -->
+<section class="section has-background-light" id="citation">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Citations</h2>
+    <div class="content">
+      <pre class="bibtex"><code>@inproceedings{rible2020failsafe,
+  author    = {Rible, Gene Patrick S. and Arriola, Nicolette Ann A. and Ramos, Jr., Manuel C.},
+  title     = {Fail-Safe Controller Architectures for Quadcopter with Motor Failures},
+  booktitle = {2020 6th International Conference on Control, Automation and Robotics (ICCAR)},
+  address   = {Singapore},
+  publisher = {IEEE},
+  year      = {2020},
+  doi       = {10.1109/ICCAR49639.2020.9108038}
+}
+
+@article{rible2020modeling,
+  author  = {Rible, Gene Patrick S. and Arriola, Nicolette Ann A. and Ramos, Jr., Manuel C.},
+  title   = {Modeling and Implementation of Quadcopter Autonomous Flight Based on Alternative Methods to Determine Propeller Parameters},
+  journal = {Advances in Science, Technology and Engineering Systems Journal},
+  volume  = {5},
+  number  = {5},
+  pages   = {727--741},
+  year    = {2020},
+  issn    = {2415-6698},
+  doi     = {10.25046/aj050589}
+}</code></pre>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== ACKNOWLEDGMENTS ============================== -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-4 has-text-centered">Acknowledgments</h2>
+    <div class="content has-text-centered">
+      <p>This project was supported in part by grants from the UP Engineering Research and Development Foundation, Inc.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== FOOTER ============================== -->
+<footer class="footer">
+  <div class="container is-max-desktop has-text-centered">
+    <p class="is-size-7">
+      <a href="https://github.com/genepatrickrible/quadcopter-failsafe" target="_blank" rel="noopener">Source for this page</a>
+      &nbsp;&middot;&nbsp;
+      Website template borrowed from
+      <a href="https://github.com/nerfies/nerfies.github.io" target="_blank" rel="noopener">Nerfies</a>,
+      used under a
+      <a href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC&nbsp;BY-SA&nbsp;4.0</a> license.
+    </p>
+  </div>
+</footer>
+
+<script src="static/js/index.js" defer></script>
+</body>
+</html>

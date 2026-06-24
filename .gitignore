@@ -1,0 +1,7 @@
+.DS_Store
+static/images/scratch/
+*.pyc
+__pycache__/
+# Source arXiv downloads (hosted copies live in static/pdfs/)
+2009.10260v1.pdf
+2010.08806v1.pdf
