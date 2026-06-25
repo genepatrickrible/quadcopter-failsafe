@@ -170,9 +170,27 @@
               </a>
             </span>
             <span class="link-block">
-              <a href="#citation" class="button is-dark is-rounded">
-                <span class="icon"><i class="fas fa-quote-right"></i></span><span>Cite</span>
-              </a>
+              <div class="dropdown cite-dropdown">
+                <div class="dropdown-trigger">
+                  <button class="button is-dark is-rounded" aria-haspopup="true" aria-controls="cite-menu-all">
+                    <span class="icon"><i class="fas fa-quote-right"></i></span>
+                    <span>Cite</span>
+                    <span class="icon is-small"><i class="fas fa-angle-down"></i></span>
+                  </button>
+                </div>
+                <div class="dropdown-menu" id="cite-menu-all" role="menu">
+                  <div class="dropdown-content">
+                    <a href="#" class="dropdown-item" data-cite-text
+                       data-citation-text="Gene Patrick S. Rible, Nicolette Ann A. Arriola, and Manuel C. Ramos Jr., &quot;Fail-Safe Controller Architectures for Quadcopter with Motor Failures,&quot; in 2020 6th International Conference on Control, Automation and Robotics (ICCAR), Singapore, 2020. doi:10.1109/ICCAR49639.2020.9108038&#10;&#10;Gene Patrick S. Rible, Nicolette Ann A. Arriola, and Manuel C. Ramos Jr., &quot;Modeling and Implementation of Quadcopter Autonomous Flight Based on Alternative Methods to Determine Propeller Parameters,&quot; Advances in Science, Technology and Engineering Systems Journal, vol. 5, no. 5, pp. 727-741, 2020. doi:10.25046/aj050589"
+                       data-citation-html="Gene Patrick S. Rible, Nicolette Ann A. Arriola, and Manuel C. Ramos Jr., &quot;Fail-Safe Controller Architectures for Quadcopter with Motor Failures,&quot; in <i>2020 6th International Conference on Control, Automation and Robotics (ICCAR)</i>, Singapore, 2020. doi:10.1109/ICCAR49639.2020.9108038<br><br>Gene Patrick S. Rible, Nicolette Ann A. Arriola, and Manuel C. Ramos Jr., &quot;Modeling and Implementation of Quadcopter Autonomous Flight Based on Alternative Methods to Determine Propeller Parameters,&quot; <i>Advances in Science, Technology and Engineering Systems Journal</i>, vol. <b>5</b>, no. 5, pp. 727-741, 2020. doi:10.25046/aj050589">
+                      <span class="icon"><i class="fas fa-copy"></i></span><span class="cite-label">Copy as text</span>
+                    </a>
+                    <a href="#citation" class="dropdown-item">
+                      <span class="icon"><i class="fas fa-code"></i></span><span>BibTeX (.bib)</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
             </span>
             <span class="link-block">
               <a href="https://calendar.app.google/9djYm5daK8n7TC3VA" class="button is-dark is-rounded" target="_blank" rel="noopener">
