@@ -185,14 +185,11 @@
 <!-- ============================== TEASER ============================== -->
 <section class="hero teaser">
   <div class="container is-max-desktop">
-    <!-- TODO(media): replace with a fail-safe flight GIF / looping clip (static/images/teaser.gif or static/videos/teaser.mp4). -->
-    <div class="placeholder-box placeholder-16x9">
-      <div class="placeholder-label">
-        <span class="icon is-large"><i class="fas fa-helicopter fa-2x"></i></span>
-        <p><strong>Replace: fail-safe flight teaser GIF / looping video</strong></p>
-        <p class="is-size-7">Put the file at <code>static/images/teaser.gif</code> or <code>static/videos/teaser.mp4</code>.</p>
-      </div>
-    </div>
+    <video class="teaser-video" autoplay muted loop playsinline controls preload="metadata"
+           aria-label="Quadcopter stabilizing and landing on two opposing propellers after induced motor failure.">
+      <source src="static/videos/teaser.mp4" type="video/mp4">
+      Your browser does not support embedded video.
+    </video>
     <h2 class="subtitle has-text-centered teaser-caption">A DJI FlameWheel 450 stabilizing and landing on two opposing propellers after induced motor failure.</h2>
   </div>
 </section>
