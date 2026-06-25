@@ -414,27 +414,25 @@
 
     <div class="result-block" id="section-model">
       <h3 class="title is-4">A quadcopter model anyone can build</h3>
-      <div class="columns is-centered">
+      <div class="columns is-multiline figure-grid">
         <div class="column is-half">
           <figure class="image result-figure"><img src="static/images/figures/astesj-fig5-rig.jpg" alt="The quadcopter suspended on a vertical rope-and-bearing rig that lets it spin freely about its yaw axis to characterize airframe air resistance."></figure>
-          <p class="fig-caption"><strong>Fig. 5</strong> &middot; Rope-and-bearing rig for air-resistance characterization (ASTESJ journal paper)</p>
+          <p class="fig-caption">Rope-and-bearing rig for air-resistance characterization</p>
         </div>
-      </div>
-      <div class="columns is-multiline figure-grid">
-        <div class="column is-one-third">
+        <div class="column is-half">
           <figure class="image result-figure"><img src="static/images/figures/astesj-fig6.png" alt="Propeller thrust as a function of PWM command value: measured data and the fitted model for all four propellers and their average."></figure>
-          <p class="fig-caption"><strong>Fig. 6</strong> &middot; Thrust vs PWM command</p>
+          <p class="fig-caption">Thrust vs PWM command</p>
         </div>
-        <div class="column is-one-third">
+        <div class="column is-half">
           <figure class="image result-figure"><img src="static/images/figures/astesj-fig7.png" alt="Propeller thrust as a function of propeller angular speed: measured data and the fitted model."></figure>
-          <p class="fig-caption"><strong>Fig. 7</strong> &middot; Thrust vs angular speed</p>
+          <p class="fig-caption">Thrust vs angular speed</p>
         </div>
-        <div class="column is-one-third">
+        <div class="column is-half">
           <figure class="image result-figure"><img src="static/images/figures/astesj-fig8.png" alt="Reaction torque as a function of propeller thrust: measured data and the fitted model."></figure>
-          <p class="fig-caption"><strong>Fig. 8</strong> &middot; Reaction torque vs thrust</p>
+          <p class="fig-caption">Reaction torque vs thrust</p>
         </div>
       </div>
-      <p class="fig-caption">Propeller characterization, ASTESJ journal paper. Solid lines are measurements; dashed lines are the fitted models averaged across the four propellers.</p>
+      <p class="fig-caption">Propeller characterization from the journal paper. Solid lines are measurements; dashed lines are the fitted models averaged across the four propellers.</p>
       <p class="content">
         Accurate quadcopter control needs the relationships between motor command, propeller speed,
         thrust, and reaction torque, plus the airframe's moments of inertia and aerodynamic drag.
@@ -450,19 +448,13 @@
     <div class="result-block" id="section-validation">
       <h3 class="title is-4">Validated in simulation and in the air</h3>
       <figure class="image result-figure"><img src="static/images/figures/astesj-fig13.png" alt="Simulated quadcopter altitude response: commanded ascent from 0 to 2 m, and controlled landing from 2 to 0 m, with attitude unaffected."></figure>
-      <p class="fig-caption"><strong>Fig. 13</strong> &middot; Simulated altitude response: ascent to 2 m and controlled landing (ASTESJ journal paper)</p>
+      <p class="fig-caption">Simulated altitude response: ascent to 2 m and controlled landing</p>
       <figure class="image result-figure"><img src="static/images/figures/astesj-fig14.png" alt="Simulated quadcopter response when banking from 0 to 5 degrees along the roll axis: roll reaches the command while pitch, yaw, and altitude stay essentially unchanged."></figure>
-      <p class="fig-caption"><strong>Fig. 14</strong> &middot; Simulated roll-banking response, with pitch, yaw, and altitude held steady (ASTESJ journal paper)</p>
-      <div class="columns figure-pair">
-        <div class="column">
-          <figure class="image result-figure"><img src="static/images/figures/astesj-fig19.png" alt="Implemented quadcopter pitch response to positive and negative banking commands."></figure>
-          <p class="fig-caption"><strong>Fig. 19</strong> &middot; Implemented pitch response to banking commands</p>
-        </div>
-        <div class="column">
-          <figure class="image result-figure"><img src="static/images/figures/astesj-fig20.png" alt="Implemented quadcopter yaw response to positive and negative rotation commands."></figure>
-          <p class="fig-caption"><strong>Fig. 20</strong> &middot; Implemented yaw response to rotation commands</p>
-        </div>
-      </div>
+      <p class="fig-caption">Simulated roll-banking response, with pitch, yaw, and altitude held steady</p>
+      <figure class="image result-figure"><img src="static/images/figures/astesj-fig19.png" alt="Implemented quadcopter pitch response to positive and negative banking commands."></figure>
+      <p class="fig-caption">Implemented pitch response to banking commands</p>
+      <figure class="image result-figure"><img src="static/images/figures/astesj-fig20.png" alt="Implemented quadcopter yaw response to positive and negative rotation commands."></figure>
+      <p class="fig-caption">Implemented yaw response to rotation commands</p>
       <p class="content">
         The assembled model may not capture every true parameter value, yet because the reaction
         torque and drag enter the dynamics in the same way, the model behaves identically to the
@@ -478,31 +470,19 @@
       <div class="columns is-centered">
         <div class="column is-two-thirds">
           <figure class="image result-figure"><img src="static/images/figures/iccar-fig1-kinematics.png" alt="Quadcopter kinematic diagram: four propellers arranged symmetrically about the center of mass, with body axes x, y, z and the roll, pitch, and yaw rotations."></figure>
-          <p class="fig-caption"><strong>Fig. 1</strong> &middot; Quadcopter kinematic diagram and coordinate frame (ICCAR conference paper)</p>
+          <p class="fig-caption">Quadcopter kinematic diagram and coordinate frame</p>
         </div>
       </div>
-      <div class="columns figure-pair">
-        <div class="column">
-          <figure class="image result-figure"><img src="static/images/figures/iccar-fig3.png" alt="Simulated three-propeller response, part 1: translational coordinates, desired translational deviation acceleration, and the required propeller thrusts approaching equilibrium."></figure>
-          <p class="fig-caption"><strong>Fig. 3</strong> &middot; Three-propeller response: position and thrusts</p>
-        </div>
-        <div class="column">
-          <figure class="image result-figure"><img src="static/images/figures/iccar-fig4.png" alt="Simulated three-propeller response, part 2: roll, pitch, and yaw angles and the body-frame angular velocity components approaching steady state."></figure>
-          <p class="fig-caption"><strong>Fig. 4</strong> &middot; Three-propeller response: attitude and angular rates</p>
-        </div>
-      </div>
-      <div class="columns figure-pair">
-        <div class="column">
-          <figure class="image result-figure"><img src="static/images/figures/iccar-fig5.png" alt="Simulated two-propeller response, part 1: translational coordinates and required thrusts after a reference change."></figure>
-          <p class="fig-caption"><strong>Fig. 5</strong> &middot; Two-propeller simulated response: position and thrusts</p>
-        </div>
-        <div class="column">
-          <figure class="image result-figure"><img src="static/images/figures/iccar-fig6.png" alt="Simulated two-propeller response, part 2: attitude angles and body-frame angular velocities stabilizing about the primary spin axis."></figure>
-          <p class="fig-caption"><strong>Fig. 6</strong> &middot; Two-propeller simulated response: attitude and rates</p>
-        </div>
-      </div>
+      <figure class="image result-figure"><img src="static/images/figures/iccar-fig3.png" alt="Simulated three-propeller response, part 1: translational coordinates, desired translational deviation acceleration, and the required propeller thrusts approaching equilibrium."></figure>
+      <p class="fig-caption">Three-propeller response: position and thrusts</p>
+      <figure class="image result-figure"><img src="static/images/figures/iccar-fig4.png" alt="Simulated three-propeller response, part 2: roll, pitch, and yaw angles and the body-frame angular velocity components approaching steady state."></figure>
+      <p class="fig-caption">Three-propeller response: attitude and angular rates</p>
+      <figure class="image result-figure"><img src="static/images/figures/iccar-fig5.png" alt="Simulated two-propeller response, part 1: translational coordinates and required thrusts after a reference change."></figure>
+      <p class="fig-caption">Two-propeller simulated response: position and thrusts</p>
+      <figure class="image result-figure"><img src="static/images/figures/iccar-fig6.png" alt="Simulated two-propeller response, part 2: attitude angles and body-frame angular velocities stabilizing about the primary spin axis."></figure>
+      <p class="fig-caption">Two-propeller simulated response: attitude and rates</p>
       <figure class="image result-figure"><img src="static/images/figures/iccar-fig7.png" alt="Implemented two-propeller attitude response while hovering: measured roll, pitch, yaw, their time derivatives, and body-frame angular velocity components stabilizing within bounds."></figure>
-      <p class="fig-caption"><strong>Fig. 7</strong> &middot; Implemented two-propeller attitude response while hovering on the physical quadcopter (ICCAR conference paper)</p>
+      <p class="fig-caption">Implemented two-propeller attitude response while hovering on the physical quadcopter</p>
       <p class="content">
         When a motor fails, the quadcopter gives up control of one attitude direction and spins
         about a primary axis to stay aloft. Two architectures handle this. The three-propeller case
@@ -602,32 +582,18 @@
   <div class="container is-max-desktop">
     <h2 class="title is-3 has-text-centered">Videos</h2>
     <p class="subtitle is-6 has-text-centered firsts-sub">
-      Upload each clip to YouTube, then replace <code>YOUTUBE_ID</code> with the 11-character video ID.
+      Upload the video to YouTube, then replace <code>YOUTUBE_ID</code> with the 11-character video ID.
     </p>
-    <div class="columns is-multiline">
-
-      <div class="column is-half">
-        <h3 class="is-size-5 has-text-weight-bold has-text-centered">Fail-safe flight demonstration</h3>
-        <!-- TODO(video): paste the YouTube ID for the fail-safe / two-propeller flight demo. -->
+    <div class="columns is-centered">
+      <div class="column is-three-quarters">
+        <!-- TODO(video): paste the 11-character YouTube ID for the combined demonstration video (the one cited in the paper). -->
         <div class="video-embed">
-          <iframe src="https://www.youtube.com/embed/YOUTUBE_ID" title="Fail-safe flight demonstration"
+          <iframe src="https://www.youtube.com/embed/YOUTUBE_ID" title="Fail-safe flight demonstration and controller gains tuning"
                   frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowfullscreen></iframe>
         </div>
-        <p class="has-text-centered is-size-7">The quadcopter stabilizing about its primary axis after induced motor failure.</p>
+        <p class="has-text-centered is-size-7">The video cited in the papers: the quadcopter stabilizing about its primary axis after induced motor failure, and the controller gains tuning process.</p>
       </div>
-
-      <div class="column is-half">
-        <h3 class="is-size-5 has-text-weight-bold has-text-centered">Controller gains tuning</h3>
-        <!-- TODO(video): paste the YouTube ID for the controller-tuning video. -->
-        <div class="video-embed">
-          <iframe src="https://www.youtube.com/embed/YOUTUBE_ID" title="Controller gains tuning"
-                  frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen></iframe>
-        </div>
-        <p class="has-text-centered is-size-7">The bang-bang style tuning process for the two-propeller attitude controller.</p>
-      </div>
-
     </div>
   </div>
 </section>
