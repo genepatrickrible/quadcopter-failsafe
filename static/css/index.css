@@ -217,5 +217,69 @@ pre.bibtex code { color: inherit; background: none; }
 .paper-card .content { margin-bottom: 1rem; }
 .paper-card .publication-links { justify-content: flex-start; }
 
+/* ----- Figures (converted from the papers' EPS) ----- */
+.figure-grid { margin-bottom: 0.5rem; }
+
+.result-figure {
+  background: #fff;
+  border: 1px solid #e6e9ee;
+  border-radius: 8px;
+  padding: 0.75rem;
+  margin: 0 auto 0.4rem;
+}
+
+.result-figure img { display: block; width: 100%; height: auto; border-radius: 4px; }
+
+.fig-caption {
+  text-align: center;
+  color: #6b7280;
+  font-size: 0.82rem;
+  margin: 0 0 1rem;
+}
+
+.fig-caption strong { color: #374151; }
+
+/* ----- Data tables recreated from the paper (Tables II and V) ----- */
+.table-wrap { overflow-x: auto; margin: 0.5rem 0 0.75rem; }
+
+table.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  font-size: 0.9rem;
+  border: 1px solid #d7dce3;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+table.data-table caption {
+  caption-side: top;
+  text-align: left;
+  font-weight: 600;
+  color: #374151;
+  padding: 0 0 0.5rem;
+}
+
+table.data-table th,
+table.data-table td {
+  border: 1px solid #e1e6ec;
+  padding: 0.4rem 0.7rem;
+  text-align: center;
+  white-space: nowrap;
+}
+
+table.data-table thead th {
+  background: #2b3340;
+  color: #f3f5f8;
+  font-weight: 600;
+}
+
+table.data-table tbody th { background: #f4f6f9; font-weight: 600; }
+table.data-table tbody tr:nth-child(even) td { background: #fafbfc; }
+table.data-table .spike-up { color: #1f7a36; font-weight: 700; }
+table.data-table .spike-down { color: #b4322a; font-weight: 700; }
+table.data-table td.limit-binding { background: #fff3a8; font-weight: 600; }
+.table-note { color: #6b7280; font-size: 0.8rem; margin: 0.1rem 0 1rem; }
+
 /* ----- Footer ----- */
 .footer { padding: 2.5rem 1.5rem; }

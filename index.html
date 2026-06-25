@@ -414,13 +414,21 @@
 
     <div class="result-block" id="section-model">
       <h3 class="title is-4">A quadcopter model anyone can build</h3>
-      <!-- TODO(media): ASTESJ journal paper (2010.08806) Figs. 6-8 (and Fig. 5 rig). -->
-      <div class="placeholder-box placeholder-wide">
-        <div class="placeholder-label">
-          <p><strong>Figure to add: ASTESJ journal paper, Figs. 6&ndash;8</strong></p>
-          <p class="is-size-7">propeller thrust vs PWM (Fig.&nbsp;6), thrust vs angular speed (Fig.&nbsp;7), reaction torque vs thrust (Fig.&nbsp;8); optional rope-and-bearing rig (Fig.&nbsp;5)</p>
+      <div class="columns is-multiline figure-grid">
+        <div class="column is-one-third">
+          <figure class="image result-figure"><img src="static/images/figures/astesj-fig6.png" alt="Propeller thrust as a function of PWM command value: measured data and the fitted model for all four propellers and their average."></figure>
+          <p class="fig-caption"><strong>Fig. 6</strong> &middot; Thrust vs PWM command</p>
+        </div>
+        <div class="column is-one-third">
+          <figure class="image result-figure"><img src="static/images/figures/astesj-fig7.png" alt="Propeller thrust as a function of propeller angular speed: measured data and the fitted model."></figure>
+          <p class="fig-caption"><strong>Fig. 7</strong> &middot; Thrust vs angular speed</p>
+        </div>
+        <div class="column is-one-third">
+          <figure class="image result-figure"><img src="static/images/figures/astesj-fig8.png" alt="Reaction torque as a function of propeller thrust: measured data and the fitted model."></figure>
+          <p class="fig-caption"><strong>Fig. 8</strong> &middot; Reaction torque vs thrust</p>
         </div>
       </div>
+      <p class="fig-caption">Propeller characterization, ASTESJ journal paper. Solid lines are measurements; dashed lines are the fitted models averaged across the four propellers.</p>
       <p class="content">
         Accurate quadcopter control needs the relationships between motor command, propeller speed,
         thrust, and reaction torque, plus the airframe's moments of inertia and aerodynamic drag.
@@ -435,11 +443,18 @@
 
     <div class="result-block" id="section-validation">
       <h3 class="title is-4">Validated in simulation and in the air</h3>
-      <!-- TODO(media): ASTESJ journal paper (2010.08806) Figs. 13-14 and 19-20. -->
-      <div class="placeholder-box placeholder-wide">
-        <div class="placeholder-label">
-          <p><strong>Figure to add: ASTESJ journal paper, Figs. 13&ndash;14 and 19&ndash;20</strong></p>
-          <p class="is-size-7">altitude ascent and landing (Fig.&nbsp;13), roll banking (Fig.&nbsp;14), pitch and yaw responses (Figs.&nbsp;19&ndash;20)</p>
+      <figure class="image result-figure"><img src="static/images/figures/astesj-fig13.png" alt="Simulated quadcopter altitude response: commanded ascent from 0 to 2 m, and controlled landing from 2 to 0 m, with attitude unaffected."></figure>
+      <p class="fig-caption"><strong>Fig. 13</strong> &middot; Simulated altitude response: ascent to 2 m and controlled landing (ASTESJ journal paper)</p>
+      <figure class="image result-figure"><img src="static/images/figures/astesj-fig14.png" alt="Simulated quadcopter response when banking from 0 to 5 degrees along the roll axis: roll reaches the command while pitch, yaw, and altitude stay essentially unchanged."></figure>
+      <p class="fig-caption"><strong>Fig. 14</strong> &middot; Simulated roll-banking response, with pitch, yaw, and altitude held steady (ASTESJ journal paper)</p>
+      <div class="columns figure-pair">
+        <div class="column">
+          <figure class="image result-figure"><img src="static/images/figures/astesj-fig19.png" alt="Implemented quadcopter pitch response to positive and negative banking commands."></figure>
+          <p class="fig-caption"><strong>Fig. 19</strong> &middot; Implemented pitch response to banking commands</p>
+        </div>
+        <div class="column">
+          <figure class="image result-figure"><img src="static/images/figures/astesj-fig20.png" alt="Implemented quadcopter yaw response to positive and negative rotation commands."></figure>
+          <p class="fig-caption"><strong>Fig. 20</strong> &middot; Implemented yaw response to rotation commands</p>
         </div>
       </div>
       <p class="content">
@@ -454,13 +469,34 @@
 
     <div class="result-block" id="section-architectures">
       <h3 class="title is-4">Two ways to survive a dead motor</h3>
-      <!-- TODO(media): ICCAR conference paper (2009.10260) Fig. 1 and Figs. 3-7. -->
-      <div class="placeholder-box placeholder-wide">
-        <div class="placeholder-label">
-          <p><strong>Figure to add: ICCAR conference paper, Fig.&nbsp;1 and Figs. 3&ndash;7</strong></p>
-          <p class="is-size-7">quadcopter kinematic diagram (Fig.&nbsp;1), three-propeller responses (Figs.&nbsp;3&ndash;4), two-propeller simulated and implemented responses (Figs.&nbsp;5&ndash;7)</p>
+      <div class="columns is-centered">
+        <div class="column is-two-thirds">
+          <figure class="image result-figure"><img src="static/images/figures/iccar-fig1-kinematics.png" alt="Quadcopter kinematic diagram: four propellers arranged symmetrically about the center of mass, with body axes x, y, z and the roll, pitch, and yaw rotations."></figure>
+          <p class="fig-caption"><strong>Fig. 1</strong> &middot; Quadcopter kinematic diagram and coordinate frame (ICCAR conference paper)</p>
         </div>
       </div>
+      <div class="columns figure-pair">
+        <div class="column">
+          <figure class="image result-figure"><img src="static/images/figures/iccar-fig3.png" alt="Simulated three-propeller response, part 1: translational coordinates, desired translational deviation acceleration, and the required propeller thrusts approaching equilibrium."></figure>
+          <p class="fig-caption"><strong>Fig. 3</strong> &middot; Three-propeller response: position and thrusts</p>
+        </div>
+        <div class="column">
+          <figure class="image result-figure"><img src="static/images/figures/iccar-fig4.png" alt="Simulated three-propeller response, part 2: roll, pitch, and yaw angles and the body-frame angular velocity components approaching steady state."></figure>
+          <p class="fig-caption"><strong>Fig. 4</strong> &middot; Three-propeller response: attitude and angular rates</p>
+        </div>
+      </div>
+      <div class="columns figure-pair">
+        <div class="column">
+          <figure class="image result-figure"><img src="static/images/figures/iccar-fig5.png" alt="Simulated two-propeller response, part 1: translational coordinates and required thrusts after a reference change."></figure>
+          <p class="fig-caption"><strong>Fig. 5</strong> &middot; Two-propeller simulated response: position and thrusts</p>
+        </div>
+        <div class="column">
+          <figure class="image result-figure"><img src="static/images/figures/iccar-fig6.png" alt="Simulated two-propeller response, part 2: attitude angles and body-frame angular velocities stabilizing about the primary spin axis."></figure>
+          <p class="fig-caption"><strong>Fig. 6</strong> &middot; Two-propeller simulated response: attitude and rates</p>
+        </div>
+      </div>
+      <figure class="image result-figure"><img src="static/images/figures/iccar-fig7.png" alt="Implemented two-propeller attitude response while hovering: measured roll, pitch, yaw, their time derivatives, and body-frame angular velocity components stabilizing within bounds."></figure>
+      <p class="fig-caption"><strong>Fig. 7</strong> &middot; Implemented two-propeller attitude response while hovering on the physical quadcopter (ICCAR conference paper)</p>
       <p class="content">
         When a motor fails, the quadcopter gives up control of one attitude direction and spins
         about a primary axis to stay aloft. Two architectures handle this. The three-propeller case
@@ -475,13 +511,72 @@
 
     <div class="result-block" id="section-detection">
       <h3 class="title is-4">Detecting the failure, and why spin helps</h3>
-      <!-- TODO(media): ICCAR conference paper (2009.10260) Table II and Table V. -->
-      <div class="placeholder-box placeholder-wide">
-        <div class="placeholder-label">
-          <p><strong>Figure to add: ICCAR conference paper, Table&nbsp;II and Table&nbsp;V</strong></p>
-          <p class="is-size-7">signature spikes per motor-failure combination (Table&nbsp;II), fail-safe initial-condition limits (Table&nbsp;V)</p>
-        </div>
+      <div class="table-wrap">
+        <table class="data-table">
+          <caption>Table II &middot; Signature spikes of motor-failure combinations (ICCAR conference paper)</caption>
+          <thead>
+            <tr>
+              <th scope="col">Motor failure</th>
+              <th scope="col"><em>p</em></th>
+              <th scope="col"><em>q</em></th>
+              <th scope="col"><em>r</em></th>
+              <th scope="col">&phi;</th>
+              <th scope="col">&theta;</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">1</th><td></td><td><span class="spike-up" title="spikes up">&uarr;</span></td><td><span class="spike-down" title="spikes down">&darr;</span></td><td></td><td><span class="spike-up" title="spikes up">&uarr;</span></td></tr>
+            <tr><th scope="row">2</th><td><span class="spike-down" title="spikes down">&darr;</span></td><td></td><td><span class="spike-up" title="spikes up">&uarr;</span></td><td><span class="spike-down" title="spikes down">&darr;</span></td><td></td></tr>
+            <tr><th scope="row">3</th><td></td><td><span class="spike-down" title="spikes down">&darr;</span></td><td><span class="spike-down" title="spikes down">&darr;</span></td><td></td><td><span class="spike-down" title="spikes down">&darr;</span></td></tr>
+            <tr><th scope="row">4</th><td><span class="spike-up" title="spikes up">&uarr;</span></td><td></td><td><span class="spike-up" title="spikes up">&uarr;</span></td><td><span class="spike-up" title="spikes up">&uarr;</span></td><td></td></tr>
+            <tr><th scope="row">1, 3</th><td></td><td></td><td><span class="spike-down" title="spikes down">&darr;</span></td><td></td><td></td></tr>
+            <tr><th scope="row">2, 4</th><td></td><td></td><td><span class="spike-up" title="spikes up">&uarr;</span></td><td></td><td></td></tr>
+            <tr><th scope="row">2, 3, 4</th><td></td><td><span class="spike-down" title="spikes down">&darr;</span></td><td><span class="spike-up" title="spikes up">&uarr;</span></td><td></td><td><span class="spike-down" title="spikes down">&darr;</span></td></tr>
+            <tr><th scope="row">1, 3, 4</th><td><span class="spike-up" title="spikes up">&uarr;</span></td><td></td><td><span class="spike-down" title="spikes down">&darr;</span></td><td><span class="spike-up" title="spikes up">&uarr;</span></td><td></td></tr>
+            <tr><th scope="row">1, 2, 4</th><td></td><td><span class="spike-up" title="spikes up">&uarr;</span></td><td><span class="spike-up" title="spikes up">&uarr;</span></td><td></td><td><span class="spike-up" title="spikes up">&uarr;</span></td></tr>
+            <tr><th scope="row">1, 2, 3</th><td><span class="spike-down" title="spikes down">&darr;</span></td><td></td><td><span class="spike-down" title="spikes down">&darr;</span></td><td><span class="spike-down" title="spikes down">&darr;</span></td><td></td></tr>
+          </tbody>
+        </table>
       </div>
+      <p class="table-note">
+        <span class="spike-up">&uarr;</span> spikes upward, <span class="spike-down">&darr;</span> spikes downward, blank means no characteristic spike.
+        Each failure case leaves a distinct pattern across the angular rates (<em>p</em>, <em>q</em>, <em>r</em>) and attitude angles (&phi;, &theta;).
+      </p>
+
+      <div class="table-wrap">
+        <table class="data-table">
+          <caption>Table V &middot; Fail-safe controller initial-condition limits (ICCAR conference paper)</caption>
+          <thead>
+            <tr>
+              <th scope="col" rowspan="2">State variable</th>
+              <th scope="col" colspan="2">Three-propeller</th>
+              <th scope="col" colspan="2">Two-propeller</th>
+            </tr>
+            <tr>
+              <th scope="col">+</th>
+              <th scope="col">&minus;</th>
+              <th scope="col">+</th>
+              <th scope="col">&minus;</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">&phi;</th><td>22.2&deg;</td><td>&minus;16.2&deg;</td><td>109.7&deg;</td><td>&minus;111.0&deg;</td></tr>
+            <tr><th scope="row">&theta;</th><td>20.0&deg;</td><td>&minus;20.1&deg;</td><td>103.5&deg;</td><td>&minus;104.0&deg;</td></tr>
+            <tr><th scope="row"><em>p</em></th><td>19.9 rad/s</td><td>&minus;24.1 rad/s</td><td>19.2 rad/s</td><td>&minus;18.9 rad/s</td></tr>
+            <tr><th scope="row"><em>q</em></th><td>16.2 rad/s</td><td>&minus;19.0 rad/s</td><td>25.2 rad/s</td><td>&minus;25.5 rad/s</td></tr>
+            <tr><th scope="row"><em>r</em></th><td>212.7 rad/s</td><td class="limit-binding">&minus;14.8 rad/s</td><td>&infin;</td><td class="limit-binding">&minus;6.6 rad/s</td></tr>
+            <tr><th scope="row"><em>x</em></th><td>&infin;</td><td>&minus;&infin;</td><td>&infin;</td><td>&minus;&infin;</td></tr>
+            <tr><th scope="row"><em>y</em></th><td>&infin;</td><td>&minus;&infin;</td><td>&infin;</td><td>&minus;&infin;</td></tr>
+            <tr><th scope="row"><em>z</em></th><td>&infin;</td><td>&minus;&infin;</td><td>&infin;</td><td>&minus;&infin;</td></tr>
+            <tr><th scope="row"><em>&#7819;</em></th><td>&infin;</td><td>&minus;&infin;</td><td>&infin;</td><td>&minus;&infin;</td></tr>
+            <tr><th scope="row"><em>&#7823;</em></th><td>&infin;</td><td>&minus;&infin;</td><td>&infin;</td><td>&minus;&infin;</td></tr>
+            <tr><th scope="row"><em>&#380;</em></th><td>&infin;</td><td>&minus;0.5 m/s</td><td>11.0 m/s</td><td>&minus;&infin;</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="table-note">
+        The largest initial deviation each architecture can recover from. The two-propeller limits are far wider (it tolerates roll and pitch past &plusmn;90&deg;). The highlighted yaw-rate limits on <em>r</em> are the binding constraints: the quadcopter must already be spinning fast enough about its primary axis.
+      </p>
       <p class="content">
         Each combination of failed motors produces a distinct pattern of spikes across the angular
         rate and attitude readings, so the controller can identify which motors are gone from the
