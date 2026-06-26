@@ -246,6 +246,48 @@ pre.bibtex code { color: inherit; background: none; }
 
 .fig-caption strong { color: #374151; }
 
+/* Click-to-enlarge */
+.result-figure img { cursor: zoom-in; }
+
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(15, 18, 24, 0.92);
+  padding: 2rem;
+  cursor: zoom-out;
+}
+
+.lightbox-overlay.is-open { display: flex; }
+
+.lightbox-overlay img {
+  max-width: 95vw;
+  max-height: 92vh;
+  width: auto;
+  height: auto;
+  border-radius: 6px;
+  background: #fff;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+}
+
+.lightbox-close {
+  position: fixed;
+  top: 0.75rem;
+  right: 1.25rem;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 2.5rem;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0.85;
+}
+
+.lightbox-close:hover { opacity: 1; }
+
 /* ----- Data tables recreated from the paper (Tables II and V) ----- */
 .table-wrap { overflow-x: auto; margin: 0.5rem 0 0.75rem; }
 

@@ -77,3 +77,46 @@
     if (e.key === 'Escape') closeAll();
   });
 })();
+
+// Figure lightbox: click any result figure to view it enlarged; click anywhere
+// or press Escape to close. No dependencies; the overlay is built on the fly.
+(function () {
+  const imgs = Array.from(document.querySelectorAll('.result-figure img'));
+  if (!imgs.length) return;
+
+  const overlay = document.createElement('div');
+  overlay.className = 'lightbox-overlay';
+  overlay.setAttribute('role', 'dialog');
+  overlay.setAttribute('aria-modal', 'true');
+
+  const big = document.createElement('img');
+  const close = document.createElement('button');
+  close.className = 'lightbox-close';
+  close.setAttribute('aria-label', 'Close enlarged figure');
+  close.innerHTML = '&times;';
+
+  overlay.appendChild(big);
+  overlay.appendChild(close);
+  document.body.appendChild(overlay);
+
+  function openLb(src, alt) {
+    big.src = src;
+    big.alt = alt || '';
+    overlay.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLb() {
+    overlay.classList.remove('is-open');
+    document.body.style.overflow = '';
+    big.removeAttribute('src');
+  }
+
+  imgs.forEach((img) => {
+    img.addEventListener('click', () => openLb(img.currentSrc || img.src, img.alt));
+  });
+
+  overlay.addEventListener('click', closeLb);
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && overlay.classList.contains('is-open')) closeLb();
+  });
+})();
