@@ -65,6 +65,9 @@ html { scroll-behavior: smooth; }
   transform: translateY(-2px);
 }
 
+/* Second hero button row (Schedule / Discussion) */
+.publication-links.engagement-row { margin-top: 0.75rem; }
+
 /* Visually flag buttons whose URL is still a placeholder token */
 .is-placeholder-link {
   opacity: 0.7;
