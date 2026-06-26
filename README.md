@@ -10,7 +10,7 @@ Live at **https://genepatrickrible.github.io/quadcopter-failsafe/**.
 
 | Paper | Venue | DOI |
 | ----- | ----- | --- |
-| [Fail-Safe Controller Architectures for Quadcopter with Motor Failures](https://arxiv.org/abs/2009.10260) — **Best Presentation Award, ICCAR 2020** | 2020 6th ICCAR, Singapore | [10.1109/ICCAR49639.2020.9108038](https://doi.org/10.1109/ICCAR49639.2020.9108038) |
+| [Fail-Safe Controller Architectures for Quadcopter with Motor Failures](https://arxiv.org/abs/2009.10260) (**Best Presentation Award, ICCAR 2020**) | 2020 6th ICCAR, Singapore | [10.1109/ICCAR49639.2020.9108038](https://doi.org/10.1109/ICCAR49639.2020.9108038) |
 | [Modeling and Implementation of Quadcopter Autonomous Flight Based on Alternative Methods to Determine Propeller Parameters](https://arxiv.org/abs/2010.08806) | ASTESJ 5(5), 727–741 (2020) | [10.25046/aj050589](https://doi.org/10.25046/aj050589) |
 
 ## Repository layout
@@ -27,13 +27,11 @@ quadcopter-failsafe/
   sitemap.xml, robots.txt    crawler hints
 ```
 
-## Things to fill in (search the source for these)
+## Editing
 
-- `{{GSC_TOKEN}}` / `{{BING_TOKEN}}` in `index.html` — paste verification tokens after
-  registering the site with Google Search Console and Bing Webmaster Tools.
-- `YOUTUBE_ID` (two places, the Videos section) — replace with the 11-character YouTube
-  IDs once the flight-demo and controller-tuning clips are uploaded.
-- `TODO(media)` placeholder boxes — drop in the teaser clip and the figure images.
+Edit `index.html` directly, then commit and push; GitHub Actions redeploys the
+site automatically. Figures live in `static/images/figures/`, videos in
+`static/videos/`, and the hosted paper PDFs in `static/pdfs/`.
 
 ## Preview locally
 
